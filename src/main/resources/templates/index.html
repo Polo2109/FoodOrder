@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron home-jumbo">
+        <div class="container text-center text-white jumbo-container">
+            <h1 class="display-3">Foodie</h1>
+            <p>Witaj w naszej restauracji. Zamawiaj co chcesz i ile chcesz, a my przygotujemy to dla Ciebie.</p>
+            <a th:href="@{/zamowienie}">Zamówienie</a>
+        </div>
+    </div>
+    <div th:remove="all-but-first">
+        <div class="media col-6 offset-3" th:each="item: ${items}">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#" th:href="@{|/danie/${#strings.replace(item.name, ' ', '-').toLowerCase()}|}">
+                    <h5 th:text="|${item.name}(${item.price}zł)|">Pizza Margherita (25zł)</h5>
+                </a>
+                <p th:text="${item.shortDescription}">Krótki opis pizzy margherita, pysznej klasyki na cienkim cieście i rozpływającym się serem.</p>
+                <a href="#" th:href="@{/zamowienie/dodaj(itemId=${item.id})}" class="btn btn-sm btn-primary">
+                    Dodaj do zamówienia
+                </a>
+            </div>
+        </div>
+        <div class="media col-6 offset-3">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#">
+                    <h5>Pizza Capriciosa (26zł)</h5>
+                </a>
+                <p>Krótki opis pizzy margherita, pysznej klasyki na cienkim cieście i rozpływającym się serem.</p>
+            </div>
+        </div>
+        <div class="media col-6 offset-3">
+            <i class="fas fa-utensils fa-4x"></i>
+            <div class="media-body">
+                <a href="#">
+                    <h5>Pizza Mafioso (27zł)</h5>
+                </a>
+                <p>Krótki opis pizzy margherita, pysznej klasyki na cienkim cieście i rozpływającym się serem.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
